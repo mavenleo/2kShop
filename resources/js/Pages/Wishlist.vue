@@ -37,8 +37,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import { usePage } from '@inertiajs/vue3'
-import { Inertia } from '@inertiajs/inertia'
+import { usePage, router } from '@inertiajs/vue3'
 import TopNav from '@/components/TopNav.vue'
 
 const user = usePage().props.user
@@ -64,7 +63,7 @@ const removeFromWishlist = async (productId) => {
 
 const logout = () => {
   axios.post('/api/v1/auth/logout').then(() => {
-    Inertia.visit('/')
+      router.visit('/')
   })
 }
 

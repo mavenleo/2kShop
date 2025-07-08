@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center bg-white">
     <div class="w-full max-w-md bg-white rounded-xl border border-gray-200 shadow p-8">
       <div class="text-center mb-6">
-        <h3 class="text-2xl font-bold text-purple-600 mb-1">Create Account</h3>
+        <h3 class="text-2xl font-bold mb-1" style="color: #3975f6">Create Account</h3>
         <p class="text-gray-500">Join us to start building your wishlist</p>
       </div>
       <form @submit.prevent="handleSubmit" class="space-y-4">
@@ -27,14 +27,14 @@
             class="mt-1 block w-full rounded border border-gray-300 bg-white px-3 py-2 focus:ring-2 focus:ring-purple-400 focus:border-purple-400 outline-none transition" />
         </div>
         <button type="submit" :disabled="isLoading || password !== passwordConfirmation"
-          class="w-full py-2 px-4 font-semibold rounded mt-2 text-white transition disabled:opacity-50 bg-gradient-to-r from-purple-500 to-pink-400 hover:from-purple-600 hover:to-pink-500">
+          class="w-full py-2 px-4 font-semibold rounded mt-2 text-white transition disabled:opacity-50 bg-[#3975f6] hover:bg-blue-700">
           {{ isLoading ? 'Creating account...' : 'Create Account' }}
         </button>
       </form>
       <div class="text-center mt-4">
         <small class="text-gray-500">
           Already have an account?
-            <Link href="/" class="text-purple-600 hover:underline font-medium">Sign in</Link>
+            <Link href="/" class="hover:underline font-medium" style="color: #3975f6">Sign in</Link>
         </small>
       </div>
     </div>

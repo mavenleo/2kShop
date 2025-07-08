@@ -39,7 +39,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, router } from '@inertiajs/vue3'
 import { Inertia } from '@inertiajs/inertia'
 import TopNav from '@/components/TopNav.vue'
 
@@ -82,7 +82,7 @@ const goToPage = (page) => {
 
 const logout = () => {
   axios.post('/api/v1/auth/logout').then(() => {
-    Inertia.visit('/')
+      router.visit('/')
   })
 }
 </script>
