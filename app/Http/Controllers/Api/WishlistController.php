@@ -7,6 +7,8 @@ use App\Http\Requests\WishlistRequest;
 use App\Services\WishlistService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\Resources\WishlistResource;
+use App\Http\Resources\ProductResource;
 
 class WishlistController extends Controller
 {
@@ -24,8 +26,13 @@ class WishlistController extends Controller
         try {
             $wishlist = $this->wishlistService->getUserWishlistPaginated(request()->user(), request()->perPage ?? 15);
 
+            // Map wishlist items to their products
+            $products = collect($wishlist->items())->map(function ($wishlistItem) {
+                return $wishlistItem->product;
+            })->filter();
+
             return response()->json([
-                'data' => $wishlist->items(),
+                'data' => WishlistResource::collection($wishlist->items()),
                 'pagination' => [
                     'current_page' => $wishlist->currentPage(),
                     'last_page' => $wishlist->lastPage(),

@@ -324,6 +324,7 @@ Basic product list and wishlist features built with Laravel.
 
 ## Running Unit Tests
 ```shell
+php artisan key:generate --env=testing
 php artisan test
 ```
 

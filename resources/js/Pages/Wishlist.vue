@@ -5,12 +5,12 @@
       <h1 class="text-3xl font-bold mb-2">My Wishlist</h1>
       <p class="text-gray-500 mb-8">You have {{ wishlist.length }} item{{ wishlist.length === 1 ? '' : 's' }} in your wishlist</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div v-for="item in wishlist" :key="item.product.id" class="bg-white rounded-xl shadow p-6 flex flex-col">
-          <div class="font-bold text-lg mb-1">{{ item.product.name }}</div>
-          <div class="text-gray-500 text-sm mb-2">{{ item.product.description }}</div>
-          <div class="text-blue-600 font-bold text-xl mb-4">${{ item.product.price }}</div>
+        <div v-for="item in wishlist" :key="item.id" class="bg-white rounded-xl shadow p-6 flex flex-col">
+          <div class="font-bold text-lg mb-1">{{ item.name }}</div>
+          <div class="text-gray-500 text-sm mb-2">{{ item.description }}</div>
+          <div class="text-blue-600 font-bold text-xl mb-4">${{ item.price }}</div>
           <button
-            @click="removeFromWishlist(item.product.id)"
+            @click="removeFromWishlist(item.product_id)"
             class="w-full py-2 bg-blue-600 text-white rounded font-semibold flex items-center justify-center gap-2"
           >
             <span>♥</span> Remove from Wishlist
@@ -47,7 +47,7 @@ const lastPage = ref(1)
 
 const fetchWishlist = async (page = 1) => {
   const res = await axios.get('/api/v1/wishlist', { params: { page } })
-  wishlist.value = res.data.data.map(item => ({ product: item.product }))
+  wishlist.value = res.data.data
   currentPage.value = res.data.pagination.current_page
   lastPage.value = res.data.pagination.last_page
 }
@@ -58,7 +58,7 @@ onMounted(() => {
 
 const removeFromWishlist = async (productId) => {
   await axios.delete('/api/v1/wishlist', { data: { product_id: productId } })
-  wishlist.value = wishlist.value.filter(item => item.product.id !== productId)
+  wishlist.value = wishlist.value.filter(item => item.product_id !== productId)
 }
 
 const logout = () => {
