@@ -83,7 +83,7 @@ List the technologies and tools used in this project.
 - Access the application at http://localhost:8000
 
 **Docker Setup:**
-- Access the application at http://localhost:80
+- Access the application at http://localhost:8080
   
 ## API Endpoints
 
