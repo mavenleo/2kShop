@@ -17,12 +17,10 @@ Basic product list and wishlist features built with Laravel.
 
 ## Stack Used
 
-List the technologies and tools used in this project.
-
 - Laravel 10.x
 - PHP 8.1
 - MySQL 8
-- Vue 3 + Vite + Inertia
+- Vue 3 + Vite + Inertia  #Added UI for login/registration, products and wishlist pages.
 - Docker
 - Nginx
 - Redis
@@ -33,13 +31,13 @@ List the technologies and tools used in this project.
 
 1. **Clone the Repository:**
    ```bash
-   $ git clone git@github.com:mavenleo/2kShop.git
-   $ cd 2kShop
+   git clone git@github.com:mavenleo/2kShop.git
+   cd 2kShop
    ```
 2. **Install Dependencies:**
     ```bash
-    $ composer install
-    $ yarn install
+    composer install
+    yarn install
     ```
 3. **Copy Environment File:**
     ```bash
@@ -55,15 +53,15 @@ List the technologies and tools used in this project.
     ```
 6. **Run Development Server:**
     ```bash
-    $ yarn dev
-    $ php artisan serve
+    yarn dev
+    php artisan serve
     ```
 
 ### Docker Setup
 
 1. **CD to application root:**
    ```bash
-   cd technical-assignment-back-end-engineer-mavenleo
+   cd 2kShop
    ```
 1. **Copy Environment File:**
    ```bash
