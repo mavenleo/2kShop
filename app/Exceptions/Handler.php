@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Throwable;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -25,6 +26,18 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception): Response|JsonResponse
     {
         if ($request->expectsJson() || $request->is('api/*')) {
+            // Handle validation errors
+            if ($exception instanceof ValidationException) {
+                return response()->json([
+                    'message' => 'The given data was invalid.',
+                    'errors' => $exception->errors(),
+                ], 422);
+            }
+
+            if ($exception instanceof AuthenticationException) {
+                return $this->unauthenticated($request, $exception);
+            }
+
             $status = 500;
             $message = 'Server Error';
 
@@ -41,6 +54,14 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+        return redirect()->guest(route('login'));
     }
 
 

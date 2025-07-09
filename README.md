@@ -219,14 +219,16 @@ Basic product list and wishlist features built with Laravel.
   {
     "data": [
       {
-        "id": 1,
-        "user_id": 1,
-        "product_id": 1,
-        "product": {
-          "id": 1,
-          "name": "Pioneer DJ Mixer"
+            "id": 36,
+            "user_id": 1,
+            "name": "Product 1448",
+            "product_id": 6,
+            "description": "Consectetur omnis tenetur autem deserunt veniam. Quo aut sapiente quia tempore reprehenderit.",
+            "price": "973.68",
+            "created_at": "2025-07-08T14:03:12.000000Z",
+            "updated_at": "2025-07-08T14:03:12.000000Z",
+            "deleted_at": null
         }
-      }
     ],
     "pagination": {
       "current_page": 1,
