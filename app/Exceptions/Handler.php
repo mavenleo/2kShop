@@ -22,13 +22,25 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    protected function unauthenticated($request, AuthenticationException $exception): Response|JsonResponse|RedirectResponse
+    public function render($request, Throwable $exception): Response|JsonResponse
     {
         if ($request->expectsJson() || $request->is('api/*')) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
+            $status = 500;
+            $message = 'Server Error';
+
+            if (method_exists($exception, 'getStatusCode')) {
+                $status = $exception->getStatusCode();
+            }
+            if (method_exists($exception, 'getMessage') && $exception->getMessage()) {
+                $message = $exception->getMessage();
+            }
+
+            return response()->json([
+                'message' => $message,
+            ], $status);
         }
 
-        return redirect()->guest(route('login'));
+        return parent::render($request, $exception);
     }
 
 
